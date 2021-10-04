@@ -13,7 +13,23 @@ import { NotImplementedError } from '../extensions/index.js';
  * createDreamTeam(['Olivia', 1111, 'Lily', 'Oscar', true, null]) => 'LOO'
  *
  */
-export default function createDreamTeam(/* members */) {
-  throw new NotImplementedError('Not implemented');
-  // remove line with error and write your code here
-}
+export default function createDreamTeam(members) {
+  if (!Array.isArray(members)) {
+		return false;
+		} 
+	let arrString = [];
+	let func = members.map(function(num) {
+		if (typeof num !== 'string') {
+		return '';
+		} else {
+			arrString.push(num)
+		}
+	});
+	let letters = [];
+	for (let i = 0; i < arrString.length; i++) {
+		let itemArr = arrString[i].trim();
+		letters.push(itemArr[0].toUpperCase());
+	}
+	let result = letters.sort().join('');
+	return result;
+};
