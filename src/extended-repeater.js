@@ -16,10 +16,31 @@ import { NotImplementedError } from '../extensions/index.js';
  *
  */
 export default function repeater(str, options) {
-  // function repeater(str) {
-	// 	let a = str.split('-');
-	// 	console.log(a);
-	// };
-	// repeater('STRING STRING');//, { repeatTimes: 3, separator: '**', 
-	// //  * addition: 'PLUS', additionRepeatTimes: 3, additionSeparator: '00' });
+  let addit =[];
+  let res = [];
+  str = String(str);
+  if (options.addition === null) {
+    options.addition = String(options.addition);
+  }
+  
+  function concat(n = 1, arr, item){
+    for(let i = 0; i < n; i++) {
+       arr.push(item);
+    }
+  }
+  
+  concat(options.additionRepeatTimes, addit, options.addition);
+  if (options.additionSeparator){
+    addit = addit.join(options.additionSeparator);
+  } else {
+    addit = addit.join('|');
+  }
+  concat(options.repeatTimes, res, `${str}${addit}`);
+
+  if (options.separator){
+    res = res.join(options.separator);
+  } else {
+    res = res.join('+');
+  }
+  return res;
 }
